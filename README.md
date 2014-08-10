@@ -14,6 +14,7 @@ repository.  To build it, do:
     cabal build
 
 To run the test suite:
+
     cabal configure --enable-tests
     cabal build
     cabal test
