@@ -13,3 +13,7 @@ repository.  To build it, do:
     cabal install --only-dependencies
     cabal build
 
+To run the test suite:
+    cabal configure --enable-tests
+    cabal build
+    cabal test
