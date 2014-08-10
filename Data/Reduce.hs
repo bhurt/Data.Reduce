@@ -2,6 +2,7 @@ module Data.Reduce where
 
 import qualified Data.Foldable as Foldable
 import Data.Monoid
+import Data.Maybe
 
 inc :: (a -> a -> a) -> [ Maybe a ] -> a -> [ Maybe a ]
 inc _ [] x = [ Just x ]
@@ -57,8 +58,8 @@ instance Monoid a => Monoid (Reduce a) where
     mempty = Reduce []
     mappend (Reduce xs) (Reduce ys) = Reduce $ add mappend xs ys
 
-reduceSort :: Data.Foldable.Foldable t => (a -> a -> Ordering) -> t a -> [a]
-reduceSort cmp xs = fromMaybe [] $ fini merge $ Data.Foldable.foldl' f [] xs
+reduceSort :: Foldable.Foldable t => (a -> a -> Ordering) -> t a -> [a]
+reduceSort cmp xs = fromMaybe [] $ fini merge $ Foldable.foldl' f [] xs
     where
         f d x = inc merge d [ x ]
         merge [] ys = ys
