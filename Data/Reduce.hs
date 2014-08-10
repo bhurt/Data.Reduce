@@ -62,9 +62,9 @@ reduceSort :: Foldable.Foldable t => (a -> a -> Ordering) -> t a -> [a]
 reduceSort cmp xs = fromMaybe [] $ fini merge $ Foldable.foldl' f [] xs
     where
         f d x = inc merge d [ x ]
-        merge [] ys = ys
-        merge xs [] = xs
-        merge xs@(x:_) (y:ys) | cmp x y == GT = y : merge xs ys
-        merge (x:xs) ys = x : merge xs ys
+        merge [] qs = qs
+        merge ps [] = ps
+        merge ps@(p:_) (q:qs) | cmp p q == GT = q : merge ps qs
+        merge (p:ps) qs = p : merge ps qs
 
 
